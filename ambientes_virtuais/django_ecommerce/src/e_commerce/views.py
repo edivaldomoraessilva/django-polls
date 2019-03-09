@@ -12,19 +12,19 @@ def home_page(request):
     if request.user.is_authenticated:
         context["premium_content"] = "Você é um usuário Premium"
     return render(request, "home_page.html", context)
-
+    
 def about_page(request):
     context = {
-                    "title": "Sobre a página",
-                    "content": "Bem vindo a Sobre a página"
+                    "title": "About Page",
+                    "content": "Bem vindo a About Page"
               }
     return render(request, "about/view.html", context)
 
 def contact_page(request):
     contact_form = ContactForm(request.POST or None)
     context = {
-                    "title": "Página do Contato",
-                    "content": "Bem vindo a Página do Contato",
+                    "title": "Contact Page",
+                    "content": "Bem vindo a Contact Page",
                     "form": contact_form	
               }
     if contact_form.is_valid():
@@ -37,18 +37,19 @@ def login_page(request):
                     "form": form
               }
     print("User logged in")
-    #print(request.user.is_authenticated)
+    print(request.user.is_authenticated)
     if form.is_valid():
         print(form.cleaned_data)
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password) 
         print(user)
-        #print(request.user.is_authenticated)
+        print(request.user.is_authenticated)
         if user is not None:
-            #print(request.user.is_authenticated)
+            print(request.user.is_authenticated)
             login(request, user)
             print("Login válido")
+            print(request.user.is_authenticated)
             # Redireciona para uma página de sucesso.
             return redirect("/")
         else:
