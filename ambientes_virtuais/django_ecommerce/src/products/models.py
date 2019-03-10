@@ -2,6 +2,7 @@ from django.db import models
 
 #Custom queryset
 class ProductQuerySet(models.query.QuerySet):
+    
     def active(self):
         return self.filter(active = True)
 
@@ -17,7 +18,7 @@ class ProductManager(models.Manager):
         return self.get_queryset().active()
 
     def featured(self):
-        #return self.get_queryset().filter(featured = True)
+        #self.get_queryset().filter(featured = True)
         return self.get_queryset().featured()
 
     def get_by_id(self, id):
